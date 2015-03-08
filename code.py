@@ -22,19 +22,28 @@ dataset =  open_url('http://mynasadata.larc.nasa.gov/thredds/dodsC/las/monthly_S
 ## Convert data to dict for US (lat and long are adjusted accordingly)
 data =collections.defaultdict(list)
 i=0
-for month in range(12):
+for month in range(2,12):
   for lat in range(113,140):
-    for long in range(50,118):
+    for lon in range(50,118):
       if i%10 == 0:
         print "Progress @ lat = ", lat, "long = ", long
       i+=1
-      data[lat,long].append([dataset['GLOB_RADIATION']['GLOB_RADIATION'].data[month][0][lat][long]])
+      if len(data[lat,lon]) != 3:
+          data[lat,lon].append([dataset['GLOB_RADIATION']['GLOB_RADIATION'].data[month][0][lat][lon]])
+
 
 
 ## Writing dict to csv
 import csv
 file  = open('data.csv','w')
 a =  csv.writer(file)
-a = ['lat', 'long', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'july', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+a = [['lat', 'long', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'july', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']]
 for i in data.keys():
-  a  = [i[0],i[1]] + data[i]
+  a.append()[i[0],i[1]] + data[i]
+
+with open('data.csv','w') as fp:
+    a = csv.writer(fp, delimiter=',')
+    data_csv = [['lat', 'long', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'july', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']]
+    for i in data.keys():
+        data_csv.append([i[0]-90,i[1]-180] + [x[0] for x in data[i]]) ## adjust for lat lon, they were taken in the form of index
+    a.writerows(data_csv)
