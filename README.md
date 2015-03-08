@@ -1,5 +1,5 @@
 # SolarataHack
-Data Science Hackathon: Mapping Solar Power potential in LA
+Data Science Hackathon: Mapping of  'Profit due to Solar Energy Generation per unit dollar spent in installation'
 
 
 ## Important note about csv file:
