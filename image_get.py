@@ -2,11 +2,11 @@
 
 import urllib, os ,time
 
-os.chdir('/Users/Abhi/Desktop/hack')
+os.chdir('/Users/mac/Desktop/projects/dshack/SolarataHack/')
 
 shifter=.0058
-x_init=34.1326-shifter
-y_init=-118.123+shifter
+x_init=34.15-shifter
+y_init=-118.297+shifter
 x_final=33.83
 y_final=-118.1
 
